@@ -1,3 +1,47 @@
+V2 Plugins
+-----------
+
+  v2/                                                                                                                                                                                                                                      
+  ├── eltek_checks/agent_based/     (6 files)                                                                                                                                                                                              
+  ├── narada_checks/agent_based/    (1 file)                                                                                                                                                                                               
+  ├── edfamux_checks/agent_based/   (5 files)                                                                                                                                                                                              
+  └── kea_checks/agent_based/       (1 file)                                                                                                                                                                                               
+                                                                                                                                                                                                                                           
+  Changes Applied to All v1 Plugins (12 files)                                                                                                                                                                                             
+                                                                                                                                                                                                                                           
+  - Import: from .agent_based_api.v1 import register, ... → from cmk.agent_based.v2 import SNMPSection, CheckPlugin, ...                                                                                                                   
+  - SNMP registration: register.snmp_section(...) → snmp_section_xxx = SNMPSection(...)                                                                                                                                                    
+  - Check registration: register.check_plugin(...) → check_plugin_xxx = CheckPlugin(...)                                                                                                                                                   
+  - Removed all debug print() statements                                                                                                                                                                                                   
+                                                                                                                                                                                                                                           
+  Merges                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                           
+  - eltek_door.py + eltek_door_v2.py → single eltek_door.py using the business-hours-aware version                                                                                                                                         
+                                                                                                                                                                                                                                           
+  Bug Fixes                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                           
+  - edfamux_check.py: Removed broken Metric yield referencing undefined battery_runtime variable
+  - edfamux_light_old.py: Added missing from ctypes import pointer, c_int, cast, POINTER, c_float import
+  - kea_check.py: Removed unused struct/datetime imports and print() statements
+
+  Deployment
+
+  Copy each family folder to your CheckMK site:
+  # Example for eltek:
+  cp -r v2/eltek_checks ~/local/lib/python3/cmk_addons/plugins/eltek_checks/
+  # Repeat for narada_checks, edfamux_checks, kea_checks
+
+  Then verify with:
+  cmk -vI --detect-plugins=<plugin_name> <hostname>
+  cmk --detect-plugins=<plugin_name> -v <hostname>
+  cmk -R
+##############################################################################################################
+
+
+V1 Plugins
+----------
+
+
 # check_mk_plugins
 CheckMK Plugins
 
