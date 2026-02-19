@@ -32,9 +32,14 @@ V2 Plugins
   # Repeat for narada_checks, edfamux_checks, kea_checks
 
   Then verify with:
+  -----------------
+
   cmk -vI --detect-plugins=<plugin_name> <hostname>
+
   cmk --detect-plugins=<plugin_name> -v <hostname>
+
   cmk -R
+
 ##############################################################################################################
 
 
