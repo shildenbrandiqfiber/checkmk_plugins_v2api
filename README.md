@@ -7,13 +7,6 @@ V2 Plugins
   ├── edfamux_checks/agent_based/   (5 files)                                                                                                                                                                                              
   └── kea_checks/agent_based/       (1 file)                                                                                                                                                                                               
                                                                                                                                                                                                                                            
-  Changes Applied to All v1 Plugins (12 files)                                                                                                                                                                                             
-                                                                                                                                                                                                                                           
-  - Import: from .agent_based_api.v1 import register, ... → from cmk.agent_based.v2 import SNMPSection, CheckPlugin, ...                                                                                                                   
-  - SNMP registration: register.snmp_section(...) → snmp_section_xxx = SNMPSection(...)                                                                                                                                                    
-  - Check registration: register.check_plugin(...) → check_plugin_xxx = CheckPlugin(...)                                                                                                                                                   
-  - Removed all debug print() statements                                                                                                                                                                                                   
-                                                                                                                                                                                                                                           
   Merges                                                                                                                                                                                                                                   
                                                                                                                                                                                                                                            
   - eltek_door.py + eltek_door_v2.py → single eltek_door.py using the business-hours-aware version                                                                                                                                         
@@ -28,7 +21,7 @@ V2 Plugins
 
   Copy each family folder to your CheckMK site:
   # Example for eltek:
-  cp -r v2/eltek_checks ~/local/lib/python3/cmk_addons/plugins/eltek_checks/
+  cp -r v2/eltek_checks ~/local/lib/python3/cmk_addons/plugins/
   # Repeat for narada_checks, edfamux_checks, kea_checks
 
   Then verify with:
