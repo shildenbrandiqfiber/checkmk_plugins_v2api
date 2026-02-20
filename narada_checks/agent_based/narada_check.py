@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from cmk.agent_based.v2 import (
-    SNMPSection, CheckPlugin, Service, Result, State, Metric, check_levels, startswith, SNMPTree
+    SimpleSNMPSection, CheckPlugin, Service, Result, State, Metric, check_levels, startswith, SNMPTree
 )
 
 # ------------------------
@@ -121,7 +121,7 @@ def check_narada_struct(item, section):
 # SNMP Section
 # ------------------------
 
-snmp_section_narada_battery_table = SNMPSection(
+snmp_section_narada_battery_table = SimpleSNMPSection(
     name="narada_battery_table",
     parse_function=parse_narada_battery_struct,
     detect=startswith(".1.3.6.1.4.1.12148.10.13.24.1.2.1", "1:BattSOC"),

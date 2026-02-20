@@ -2,7 +2,7 @@
 
 import struct
 from datetime import datetime
-from cmk.agent_based.v2 import SNMPSection, CheckPlugin, Service, Result, State, Metric, check_levels, startswith, SNMPTree
+from cmk.agent_based.v2 import SimpleSNMPSection, CheckPlugin, Service, Result, State, Metric, check_levels, startswith, SNMPTree
 
 def decode_byte_string_to_datetime(byte_string):
     try:
@@ -117,7 +117,7 @@ def check_eltek(section):
     # BATTERY
     yield from check_levels(
         value=battery_temp,
-        levels_upper=(125, 140),
+        levels_upper=("fixed", (125, 140)),
         metric_name="battery_temp",
         label="Battery Temperature",
         boundaries=(0, 150),
@@ -125,13 +125,13 @@ def check_eltek(section):
     # CLEARFIELD CAB TEMP
     yield from check_levels(
         value=clearfield_cab_temp,
-        levels_upper=(125,140),
+        levels_upper=("fixed", (125, 140)),
         metric_name="clearfield_cab_temp",
         label="Cab Temp",
         boundaries = (0, 200),
     )
 
-snmp_section_eltek_base_config = SNMPSection(
+snmp_section_eltek_base_config = SimpleSNMPSection(
     name = "eltek_base_config",
     parse_function = parse_eltek,
     detect = startswith(".1.3.6.1.4.1.12148.10.13.8.2.1.2.1", "SmartPack S"),

@@ -1,5 +1,10 @@
 V2 Plugins
 -----------
+ --To Create New Package
+   -- Build new package manifest
+   -- run mkp package new_package.manifest
+
+
 
   v2/                                                                                                                                                                                                                                      
   ├── eltek_checks/agent_based/     (6 files)                                                                                                                                                                                              

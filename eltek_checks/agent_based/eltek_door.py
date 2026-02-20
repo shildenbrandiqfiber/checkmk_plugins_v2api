@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from cmk.agent_based.v2 import SNMPSection, CheckPlugin, Service, Result, State, startswith, SNMPTree
+from cmk.agent_based.v2 import SimpleSNMPSection, CheckPlugin, Service, Result, State, startswith, SNMPTree
 
 import datetime
 
@@ -37,7 +37,7 @@ def check_eltek(section):
         yield Result(state=State.OK, summary="Cabinet Door is Closed")
 
 
-snmp_section_eltek_door_config = SNMPSection(
+snmp_section_eltek_door_config = SimpleSNMPSection(
     name = "eltek_door_config",
     parse_function = parse_eltek,
     detect = startswith(".1.3.6.1.4.1.12148.10.13.8.2.1.2.1", "SmartPack S"),

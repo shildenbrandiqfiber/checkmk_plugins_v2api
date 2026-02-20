@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from cmk.agent_based.v2 import SNMPSection, CheckPlugin, Service, Result, State, Metric, startswith, SNMPTree
+from cmk.agent_based.v2 import SimpleSNMPSection, CheckPlugin, Service, Result, State, Metric, startswith, SNMPTree
 
 def parse_eltek(string_table):
     result = {}
@@ -39,7 +39,7 @@ def check_eltek(section):
         levels = (240,60),
     )
 
-snmp_section_eltek_runtime_config = SNMPSection(
+snmp_section_eltek_runtime_config = SimpleSNMPSection(
     name = "eltek_runtime_config",
     parse_function = parse_eltek,
     detect = startswith(".1.3.6.1.4.1.12148.10.13.8.2.1.2.1", "SmartPack S"),

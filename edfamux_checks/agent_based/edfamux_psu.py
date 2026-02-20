@@ -2,7 +2,7 @@
 
 import struct
 from datetime import datetime
-from cmk.agent_based.v2 import SNMPSection, CheckPlugin, Service, Result, State, startswith, SNMPTree
+from cmk.agent_based.v2 import SimpleSNMPSection, CheckPlugin, Service, Result, State, startswith, SNMPTree, OIDEnd
 
 def decode_byte_string_to_datetime(byte_string):
     try:
@@ -29,7 +29,7 @@ def check_edfa4(section):
     if not error_status:
         yield Result(state=State.OK, summary="Edfamux Power Supplies - OK")
 
-snmp_section_edfamux_base_config_psu = SNMPSection(
+snmp_section_edfamux_base_config_psu = SimpleSNMPSection(
     name = "edfamux_base_config_psu",
     parse_function = parse_edfa4,
     detect = startswith(".1.3.6.1.2.1.1.2.0", ".1.3.6.1.4.1.55872"),
@@ -37,7 +37,7 @@ snmp_section_edfamux_base_config_psu = SNMPSection(
         base='.1.3.6.1',
         oids=[
             '2.1.1.2.0', # Object ID
-            ''
+#            OIDEnd()
         ]
     ),
 )

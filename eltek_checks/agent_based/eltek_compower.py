@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from cmk.agent_based.v2 import SNMPSection, CheckPlugin, Service, Result, State, startswith, SNMPTree
+from cmk.agent_based.v2 import SimpleSNMPSection, CheckPlugin, Service, Result, State, startswith, SNMPTree
 
 def parse_eltek(string_table):
     result = {}
@@ -17,7 +17,7 @@ def check_eltek(section):
     if not error_status:
         yield Result(state=State.OK, summary="Commerical Power is good.")
 
-snmp_section_eltek_comp_config = SNMPSection(
+snmp_section_eltek_comp_config = SimpleSNMPSection(
     name = "eltek_comp_config",
     parse_function = parse_eltek,
     detect = startswith(".1.3.6.1.4.1.12148.10.11.2.1.3.1.8", "Commercial Power"),
